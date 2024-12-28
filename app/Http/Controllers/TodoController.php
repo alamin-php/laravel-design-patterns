@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\TodoInterface;
+use App\Http\Requests\TodoFormRequest;
+use App\Services\TodoService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TodoController extends Controller
 {
-    public $todoInterface;
-    public function __construct(TodoInterface $todoInterface)
+    public $todoService;
+    public function __construct(TodoService $todoService)
     {
-        $this->todoInterface = $todoInterface;
+        $this->todoService = $todoService;
     }
 
     /**
@@ -19,7 +20,7 @@ class TodoController extends Controller
      */
     public function index(): View
     {
-        $todos = $this->todoInterface->getTodos();
+        $todos = $this->todoService->getTodos();
         return view('todos.index', compact('todos'));
     }
 
@@ -34,16 +35,12 @@ class TodoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TodoFormRequest $request)
     {
-        $request->validate([
-            'title' => 'required|max:255',
-            'description' => 'required',
-        ]);
-        $todo = $this->todoInterface->saveTodo($request);
-        if($todo){
+        $todo = $this->todoService->saveTodo($request);
+        if ($todo) {
             return back()->with('success', 'Todo has been created.');
-        }else{
+        } else {
             return back()->with('error', 'Unable to create Todo!');
         }
     }

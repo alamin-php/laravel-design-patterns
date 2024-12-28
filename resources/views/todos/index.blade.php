@@ -1,7 +1,8 @@
 @extends('layouts')
 @section('content')
     <div class="row">
-        <div class="col-xl-6 m-auto">
+        <div class="col-xl-8 m-auto">
+            <h2 class="my-3 text-center">Repository + Service Design Pattern</h2>
             @if ($message = Session::get('success'))
                 <div class="alert alert-success">{{ $message }}</div>
             @elseif ($message = Session::get('error'))
