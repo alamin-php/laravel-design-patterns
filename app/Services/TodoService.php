@@ -37,6 +37,35 @@ class TodoService
     }
 
     /**
+     * Function: editTodo
+     * Description: The function will delete data.
+     */
+    public function editTodo($id)
+    {
+        return $this->todoInterface->editTodo($id);
+    }
+
+    /**
+     * Function: editTodo
+     * Description: The function will delete data.
+     */
+    public function updateTodo($request, $id)
+    {
+        $todo = $this->mapTodoFormData($request);
+        return $this->todoInterface->updateTodo($todo, $id);
+    }
+
+    /**
+     * Function: destroyTodo
+     * Description: The function will delete data.
+     */
+    public function destroyTodo($id)
+    {
+        return $this->todoInterface->destroyTodo($id);
+    }
+
+
+    /**
      * Function: saveTodo
      * Description: The function will map todo from data.
      */

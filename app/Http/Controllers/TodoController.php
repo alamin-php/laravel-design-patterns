@@ -58,15 +58,21 @@ class TodoController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $todo = $this->todoService->editTodo($id);
+        return view('todos.edit', compact('todo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(TodoFormRequest $request, string $id)
     {
-        //
+        $todo = $this->todoService->updateTodo($request, $id);
+        if ($todo) {
+            return to_route('todos.index')->with('success', 'Todo has been updated.');
+        } else {
+            return to_route('todos.index')->with('error', 'Unable to update Todo!');
+        }
     }
 
     /**
@@ -74,6 +80,11 @@ class TodoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $todo = $this->todoService->destroyTodo($id);
+        if ($todo) {
+            return back()->with('success', 'Todo has been deleted.');
+        } else {
+            return back()->with('error', 'Unable to delete Todo!');
+        }
     }
 }
