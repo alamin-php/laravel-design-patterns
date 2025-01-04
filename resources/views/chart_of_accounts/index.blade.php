@@ -10,7 +10,7 @@
         <div id="chart-treeview" class="mt-4">
             <ul>
                 @foreach ($accounts as $account)
-                    <li id="account-{{ $account->id }}" data-jstree='{"opened": true, "icon": "bi bi-three-dots"}'>
+                    <li id="account-{{ $account->id }}" data-jstree='{"opened": true, "icon": "bi bi-dash"}'>
                         <a class="font-weight-bold" href="{{ route('chart_of_accounts.edit', $account->id) }}">
                             {{ $account->name }}
                         </a>
