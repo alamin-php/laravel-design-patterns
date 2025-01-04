@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ChartOfAccount extends Model
 {
-    protected $fillable = ['name', 'code', 'parent_id', 'type', 'description'];
+    protected $fillable = ['name', 'code', 'parent_id', 'type', 'description','isDeletable'];
 
     // Self-referencing parent-child relationship
     public function parent()

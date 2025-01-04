@@ -34,15 +34,15 @@
                 </select>
             </div>
 
-            {{-- <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="code">Account Code</label>
                 <input type="text" name="code" id="code" class="form-control">
             </div>
 
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" class="form-control" rows="4"></textarea>
-            </div> --}}
+            </div>
 
             <button type="submit" class="btn btn-primary mt-3">Create Account</button>
             <a href="{{ route('chart_of_accounts.index') }}" class="btn btn-secondary mt-3">Cancel</a>

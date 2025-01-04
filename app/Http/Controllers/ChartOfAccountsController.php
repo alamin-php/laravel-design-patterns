@@ -47,8 +47,8 @@ class ChartOfAccountsController extends Controller
     public function edit(ChartOfAccount $chartOfAccount)
     {
         $accounts = ChartOfAccount::where('id', '!=', $chartOfAccount->id)->get();
+        // return response()->json($accounts);
 
-        // dd($accounts);
         return view('chart_of_accounts.edit', [
             'account' => $chartOfAccount,
             'accounts' => $accounts,
@@ -76,8 +76,13 @@ class ChartOfAccountsController extends Controller
 
     public function destroy(ChartOfAccount $chartOfAccount)
     {
-        $chartOfAccount->delete();
-        return redirect()->route('chart_of_accounts.index')->with('success', 'Account deleted successfully.');
+        if ($chartOfAccount->isDeletable) {
+            $chartOfAccount->delete();
+            return redirect()->route('chart_of_accounts.index')->with('success', 'Account deleted successfully.');
+        }
+
+        return redirect()->route('chart_of_accounts.index')->with('error', 'This account cannot be deleted.');
     }
+
 
 }

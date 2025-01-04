@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable(); // Self-referencing parent
             $table->string('type')->nullable(); // Asset, Liability, Income, Expense, etc.
             $table->text('description')->nullable();
+            $table->boolean('isDeletable')->default(true);
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('chart_of_accounts')->onDelete('cascade');
