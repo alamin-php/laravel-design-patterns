@@ -19,6 +19,10 @@ class ChartOfAccount extends Model
         return $this->hasMany(ChartOfAccount::class, 'parent_id')->with('children');
     }
 
+    public function accounts_ledger(){
+        return $this->hasMany(AccountLedger::class, 'chart_of_accounts_id');
+    }
+
     // Scope for filtering by type
     public function scopeOfType($query, $type)
     {

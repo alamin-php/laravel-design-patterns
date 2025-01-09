@@ -10,7 +10,24 @@ class AccountLedgerController extends Controller
 {
     public function index()
     {
-        $ledgers = AccountLedger::with('chartOfAccount')->latest()->get();
+        $groupedAccounts = AccountLedger::with('chartOfAccount')
+            ->get()
+            ->groupBy('ledger_name') // Group by ledger_name
+            ->map(function ($ledgerGroup) {
+                // Format each group for better output
+                return $ledgerGroup->map(function ($ledger) {
+                    return [
+                        'ledger_name' => $ledger->ledger_name,
+                        'chart_of_account' => $ledger->chartOfAccount,
+                    ];
+                });
+            });
+
+
+
+
+        return response()->json($groupedAccounts);
+
         return view('account_ledgers.index', compact('ledgers'));
     }
 
@@ -36,7 +53,7 @@ class AccountLedgerController extends Controller
     public function edit(AccountLedger $accountLedger)
     {
         $chartOfAccounts = ChartOfAccount::all(); // Fetch all Chart of Accounts
-    return view('account_ledgers.edit', compact('accountLedger', 'chartOfAccounts'));
+        return view('account_ledgers.edit', compact('accountLedger', 'chartOfAccounts'));
     }
 
     public function update(Request $request, AccountLedger $accountLedger)

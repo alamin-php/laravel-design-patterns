@@ -39,6 +39,22 @@
 <body>
 
     <div class="container py-4">
+        <nav class="mb-5">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('todos.index') ? 'active' : '' }}" href="{{ route('todos.index') }}">Todos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('chart_of_accounts.index') ? 'active' : '' }}" href="{{ route('chart_of_accounts.index') }}">COA</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('account_ledgers.index') ? 'active' : '' }}" href="{{ route('account_ledgers.index') }}">Ledger</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('product_types.index') ? 'active' : '' }}" href="{{ route('product_types.index') }}">Product Type</a>
+                </li>
+            </ul>
+        </nav>
         @yield('content')
     </div>
 
